@@ -91,7 +91,7 @@
 </script>
 
 {#if content}
-	<section id="empresas" class="py-24 border-y border-white/5 bg-white/[0.01] relative overflow-hidden select-none">
+	<section id="confianza" class="py-24 border-y border-white/5 bg-white/[0.01] relative overflow-hidden select-none">
 		<div class="absolute top-1/2 left-0 -translate-y-1/2 -z-10 w-[350px] h-[350px] bg-brand-primary/[0.03] blur-[120px] rounded-full pointer-events-none"></div>
 		<div class="absolute top-1/2 right-0 -translate-y-1/2 -z-10 w-[350px] h-[350px] bg-emerald-500/[0.02] blur-[120px] rounded-full pointer-events-none"></div>
 

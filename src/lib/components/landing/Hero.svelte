@@ -81,11 +81,6 @@
 		if (interval) clearInterval(interval);
 	});
 
-	function scrollToPersonal() {
-		const el = document.getElementById('personal');
-		if (el) el.scrollIntoView({ behavior: 'smooth' });
-	}
-
 	function scrollToEmpresas() {
 		const el = document.getElementById('empresas');
 		if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -213,7 +208,14 @@
 					class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center lg:justify-start flex-wrap"
 				>
 					<button
-						on:click={scrollToPersonal}
+						on:click={scrollToEmpresas}
+						class="w-full sm:w-auto border border-white/20 hover:border-white/40 text-white/85 hover:text-white bg-white/5 hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-base transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0 backdrop-blur-md focus:outline-none"
+					>
+						{content.ctaSecondary}
+					</button>
+
+					<button
+						on:click={scrollToEmpresas}
 						class="w-full sm:w-auto bg-brand-primary text-black px-10 py-4 rounded-full font-black text-lg hover:bg-white transition-all shadow-2xl shadow-brand-primary/30 active:scale-95 group flex items-center justify-center gap-3 focus:outline-none"
 					>
 						{content.ctaMain}
@@ -222,13 +224,6 @@
 							strokeWidth={3}
 							class="group-hover:translate-x-2 transition-transform"
 						/>
-					</button>
-
-					<button
-						on:click={scrollToEmpresas}
-						class="w-full sm:w-auto border border-white/20 hover:border-white/40 text-white/85 hover:text-white bg-white/5 hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-base transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0 backdrop-blur-md focus:outline-none"
-					>
-						{content.ctaSecondary}
 					</button>
 
 					<div class="flex items-center gap-4 px-6 py-3.5 rounded-full landing-glass-dark border border-white/10 shrink-0">
