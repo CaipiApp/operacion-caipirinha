@@ -56,7 +56,7 @@
 								href={social.url}
 								target="_blank"
 								rel="noreferrer"
-								class="w-10 h-10 rounded-xl landing-glass flex items-center justify-center hover:bg-brand-primary hover:text-black hover:border-brand-primary transition-all duration-300"
+								class="w-11 h-11 rounded-xl landing-glass flex items-center justify-center hover:bg-brand-primary hover:text-black hover:border-brand-primary transition-all duration-300"
 							>
 								{#if social.name === 'Twitter'}
 									<svg
@@ -147,20 +147,20 @@
 					<h4 class="font-black mb-8 text-[10px] uppercase tracking-[0.2em] text-brand-primary">
 						{content.productTitle}
 					</h4>
-					<ul class="space-y-4 text-brand-muted text-sm font-bold">
-						<li><a href="/caipi-app" class="hover:text-white transition-colors">Caipi App</a></li>
+					<ul class="text-brand-muted text-sm font-bold">
+						<li><a href="/caipi-app" class="hover:text-white transition-colors min-h-[44px] inline-flex items-center">Caipi App</a></li>
 						<li>
-							<a href="/caipi-empresas" class="hover:text-white transition-colors">Caipi Empresas</a>
+							<a href="/caipi-empresas" class="hover:text-white transition-colors min-h-[44px] inline-flex items-center">Caipi Empresas</a>
 						</li>
 						<li>
 							<a
 								href="https://wa.me/5493794182462"
 								target="_blank"
 								rel="noreferrer"
-								class="hover:text-white transition-colors">{content.apiLabel}</a
+								class="hover:text-white transition-colors min-h-[44px] inline-flex items-center">{content.apiLabel}</a
 							>
 						</li>
-						<li><a href="/" class="hover:text-white transition-colors">{content.costsLabel}</a></li>
+						<li><a href="/" class="hover:text-white transition-colors min-h-[44px] inline-flex items-center">{content.costsLabel}</a></li>
 					</ul>
 				</div>
 
@@ -168,11 +168,11 @@
 					<h4 class="font-black mb-8 text-[10px] uppercase tracking-[0.2em] text-brand-primary">
 						{content.legalTitle}
 					</h4>
-					<ul class="space-y-4 text-brand-muted text-sm font-bold">
+					<ul class="text-brand-muted text-sm font-bold">
 						<li>
 							<button
 								on:click={() => (showTerms = true)}
-								class="hover:text-white transition-colors cursor-pointer text-left focus:outline-none"
+								class="hover:text-white transition-colors cursor-pointer text-left focus:outline-none min-h-[44px] inline-flex items-center"
 							>
 								{content.termsLabel}
 							</button>
@@ -189,7 +189,7 @@
 				</p>
 				<div class="flex gap-10 text-[9px] font-black uppercase tracking-[0.3em] text-brand-muted">
 					{#each content.countries as country (country)}
-						<a href="/" class="hover:text-brand-primary transition-colors">{country}</a>
+						<a href="/" class="hover:text-brand-primary transition-colors min-h-[44px] inline-flex items-center">{country}</a>
 					{/each}
 				</div>
 			</div>

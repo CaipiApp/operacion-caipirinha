@@ -81,7 +81,7 @@
 
 			<div class="hidden md:flex items-center gap-8 text-sm font-medium text-brand-muted">
 				{#each content.links as link}
-					<a href={link.href} class="hover:text-white transition-colors">
+					<a href={link.href} class="hover:text-white transition-colors min-h-[44px] flex items-center">
 						{link.name}
 					</a>
 				{/each}
@@ -92,7 +92,7 @@
 				<div class="relative hidden lg:block mr-2">
 					<button
 						on:click={() => (isLangOpen = !isLangOpen)}
-						class="flex items-center gap-2 hover:bg-white/5 px-3 py-2 rounded-xl transition-all text-xs font-black uppercase tracking-widest text-brand-muted hover:text-white"
+						class="flex items-center gap-2 hover:bg-white/5 px-3 py-2 min-h-[44px] rounded-xl transition-all text-xs font-black uppercase tracking-widest text-brand-muted hover:text-white"
 					>
 						<Globe size={14} class="text-brand-primary" />
 						<span>{currentLang}</span>
@@ -127,7 +127,7 @@
 
 				<button
 					on:click={() => goto('/login')}
-					class="hidden lg:block text-sm font-black uppercase tracking-widest hover:text-brand-primary transition-colors px-4 py-2 focus:outline-none"
+					class="hidden lg:flex items-center text-sm font-black uppercase tracking-widest hover:text-brand-primary transition-colors px-4 py-2 min-h-[44px] focus:outline-none"
 				>
 					{content.login}
 				</button>
