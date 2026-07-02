@@ -32,7 +32,7 @@
 	});
 </script>
 
-<Wrapper>
+<Wrapper myclass="!bg-gradient-to-t !from-brand-dark !to-brand-gray">
 	<BackBtn on:goBack />
 		
 	<img src="/images/caipi-icon.svg" alt="caipi-icon" class="w-36 mx-auto py-12" />
@@ -55,7 +55,7 @@
 		<button
 			type="submit"
 			disabled={sending}
-			class="btn-light text-secondary inline-flex items-center justify-center gap-4"
+			class="btn-light !text-brand-primary inline-flex items-center justify-center gap-4"
 		>
 			<span>CONTINUAR</span>
 

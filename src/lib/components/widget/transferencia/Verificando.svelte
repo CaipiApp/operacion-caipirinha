@@ -43,7 +43,7 @@
 
 <Caipi class="sm:w-32 w-24 text-white absolute top-[20%] left-1/2 -translate-x-1/2" />
 <section
-	class="shadow-md text-white p-8 h-screen flex flex-col max-w-xl mx-auto gap-4 justify-center w-full overflow-hidden bg-gradient-to-t from-darkPrimary to-secondary text-center font-popMedium text-xl"
+	class="shadow-md text-white p-8 h-screen flex flex-col max-w-xl mx-auto gap-4 justify-center w-full overflow-hidden bg-gradient-to-t from-brand-dark to-brand-gray text-center font-popMedium text-xl"
 >
 	{#if !verificado}
 		<img src="/images/caipi-loader.gif" alt="" class="mx-auto sm:w-20 w-16" />

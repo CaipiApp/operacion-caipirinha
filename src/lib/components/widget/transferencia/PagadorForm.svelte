@@ -72,7 +72,7 @@
 	let paisesOpts = paises?.map((pais) => ({ label: pais.nombre, value: pais.nombre }));
 </script>
 
-<Wrapper myclass="items-center">
+<Wrapper myclass="items-center !bg-gradient-to-t !from-brand-dark !to-brand-gray">
 	<BackBtn on:goBack />
 
 	<img src="/images/caipi-icon.svg" alt="caipi-icon" class="w-24 mx-auto pt-6" />
@@ -124,7 +124,7 @@
 				<div class="w-full max-w-lg">
 					<Label forId="country" label="Ingresá tu nacionalidad:" />
 					<Select
-						class="text-gray-900 focus:outline-none focus:ring focus:ring-secondary"
+						class="text-gray-900 focus:outline-none focus:ring focus:ring-brand-primary"
 						items={paisesOpts}
 						value="Argentina"
 						id="country"
@@ -185,7 +185,7 @@
 			<button
 				type="submit"
 				disabled={sending || !terminos || !isNotFatca || !isNotPep_uif}
-				class="btn-light text-secondary inline-flex items-center justify-center gap-4 mt-4"
+				class="btn-light !text-brand-primary inline-flex items-center justify-center gap-4 mt-4"
 			>
 				<span>CONTINUAR</span>
 
