@@ -283,7 +283,7 @@
 					transition:fly={{ y: 20, duration: 800, delay: 200 }}
 					class="text-lg md:text-xl text-brand-muted mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed"
 				>
-					{currentAudienceCopy.description}
+					{content.description}
 				</p>
 
 				<div
