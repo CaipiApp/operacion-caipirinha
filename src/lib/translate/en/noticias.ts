@@ -1,0 +1,28 @@
+export default {
+	noticiasTitle: 'News',
+	noticiasTableHeadersId: 'ID',
+	noticiasTableHeadersTitle: 'Title',
+	noticiasTableHeadersDescription: 'Description',
+	noticiasTableHeadersEmoji: 'Emoji',
+	newNoticiaBtn: 'New news',
+	createNoticiaModalTitle: 'Create news',
+	createNoticiaBtn: 'Create',
+	createNoticiaSuccess: 'News created',
+	createNoticiaError: 'Error creating news',
+	noticiaTituloLabel: 'Title',
+	noticiaDescripcionLabel: 'Description',
+	noticiaEmojiLabel: 'Emoji',
+	noticiaImagenLabel: 'Image',
+	newNoticiaBreadcrumb: 'New news'
+	,
+	editNoticiaModalTitle: 'Edit news',
+	updateNoticiaBtn: 'Save changes',
+	updateNoticiaSuccess: 'News updated',
+	updateNoticiaError: 'Error updating news',
+	deleteNoticiaModalTitle: 'Delete news',
+	deleteNoticiaModalSubtitle: 'Are you sure you want to delete',
+	deleteNoticiaSuccess: 'News deleted',
+	deleteNoticiaError: 'Error deleting news',
+	cancelBtn: 'Cancel',
+	noticiaImagenPlaceholder: 'No image'
+	};

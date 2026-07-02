@@ -1,0 +1,28 @@
+export default {
+	noticiasTitle: 'Notícias',
+	noticiasTableHeadersId: 'ID',
+	noticiasTableHeadersTitle: 'Título',
+	noticiasTableHeadersDescription: 'Descrição',
+	noticiasTableHeadersEmoji: 'Emoji',
+	newNoticiaBtn: 'Nova notícia',
+	createNoticiaModalTitle: 'Criar notícia',
+	createNoticiaBtn: 'Criar',
+	createNoticiaSuccess: 'Notícia criada',
+	createNoticiaError: 'Erro ao criar notícia',
+	noticiaTituloLabel: 'Título',
+	noticiaDescripcionLabel: 'Descrição',
+	noticiaEmojiLabel: 'Emoji',
+	noticiaImagenLabel: 'Imagem',
+	newNoticiaBreadcrumb: 'Nova notícia'
+	,
+	editNoticiaModalTitle: 'Editar notícia',
+	updateNoticiaBtn: 'Salvar alterações',
+	updateNoticiaSuccess: 'Notícia atualizada',
+	updateNoticiaError: 'Erro ao atualizar notícia',
+	deleteNoticiaModalTitle: 'Excluir notícia',
+	deleteNoticiaModalSubtitle: 'Tem certeza que deseja excluir',
+	deleteNoticiaSuccess: 'Notícia excluída',
+	deleteNoticiaError: 'Erro ao excluir notícia',
+	cancelBtn: 'Cancelar',
+	noticiaImagenPlaceholder: 'Sem imagem'
+	};

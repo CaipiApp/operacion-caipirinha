@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 85" fill="none">
+  <!-- Swirl Icon Group -->
+  <g transform="translate(10, 5)">
+    <!-- Gradients -->
+    <defs>
+      <!-- Gradient for the main swirling arch -->
+      <linearGradient id="swirlGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#9a5be5" />
+        <stop offset="35%" stop-color="#1c4dd3" />
+        <stop offset="70%" stop-color="#2dd4bf" />
+        <stop offset="100%" stop-color="#38bdf8" />
+      </linearGradient>
+    </defs>
+
+    <!-- Outer Swirling Element (concentric rings overlapping styled with precise SVG paths) -->
+    <path d="M 37.5 75 C 16.8 75 0 58.2 0 37.5 C 0 16.8 16.8 0 37.5 0 C 58.2 0 75 16.8 75 37.5 C 75 50.5 68.5 61.2 58.0 67.5" stroke="url(#swirlGrad)" stroke-width="12" stroke-linecap="round" fill="none" />
+    
+    <!-- White Inner Core Circle overlay -->
+    <circle cx="37.5" cy="37.5" r="23" fill="#ffffff" />
+    
+    <!-- Inner Cyan/Blue core dot -->
+    <circle cx="37.5" cy="37.5" r="9" fill="#1d90f4" />
+  </g>
+
+  <!-- Typography Group (using official Chamber navy color #1e2b9c and font) -->
+  <g transform="translate(105, 12)">
+    <text x="0" y="18" fill="#1b2585" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="20" letter-spacing="0.2">CÁMARA</text>
+    <text x="0" y="39" fill="#1b2585" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="20" letter-spacing="0.2">ARGENTINA</text>
+    <text x="0" y="60" fill="#1b2585" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="20" letter-spacing="0.2">FINTECH</text>
+  </g>
+</svg>

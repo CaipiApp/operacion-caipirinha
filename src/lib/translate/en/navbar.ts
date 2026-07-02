@@ -1,0 +1,22 @@
+export default {
+	navbarEnterprises: 'Enterprises',
+	comisiones: 'Comisiones',
+	navbarUsers: 'Users',
+	navbarConfigurations: 'Configurations',
+	navbarPayments: 'Payments',
+	navbarPaymentsTooltip: 'Generate new payment',
+	navbarStaticQrPayments: 'QR Payments',
+	navbarStaticQrPaymentsTooltip: 'Generate new QR payment',
+	navbarNoticias: 'News',
+	navbarNoticiasTooltip: 'Manage news',
+	navbarNotificaciones: 'Notifications',
+	navbarNotificacionesTooltip: 'Manage notifications',
+	navbarAccounts: 'Accounts',
+	navbarAccountsTooltip: 'Here details of the destination accounts',
+	navbarManteca: 'Manteca',
+	navbarMantecaUsers: 'Users',
+	navbarMantecaDeposits: 'Deposits',
+	navbarMantecaWithdraws: 'Withdraws',
+	navbarMantecaUsersTransactions: 'Transactions',
+	navbarAdminPayments: 'Payments'
+};

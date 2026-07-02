@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/
+
+# Permitir a todos los rastreadores indexar el sitio
+User-agent: *
+Allow: /
+
+# Ubicación del Sitemap
+Sitemap: https://caipi.app/sitemap.xml

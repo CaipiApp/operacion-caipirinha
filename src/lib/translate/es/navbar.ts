@@ -1,0 +1,22 @@
+export default {
+	navbarEnterprises: 'Empresas',
+	comisiones: 'Comisiones',
+	navbarUsers: 'Usuarios',
+	navbarConfigurations: 'Configuraciones',
+	navbarPayments: 'Cobros',
+	navbarPaymentsTooltip: 'Generar nuevo cobro',
+	navbarStaticQrPayments: 'Cobros QR',
+	navbarStaticQrPaymentsTooltip: 'Generar nuevo cobro QR',
+	navbarNoticias: 'Noticias',
+	navbarNoticiasTooltip: 'Gestionar noticias',
+	navbarNotificaciones: 'Notificaciones',
+	navbarNotificacionesTooltip: 'Gestionar notificaciones',
+	navbarAccounts: 'Cuentas',
+	navbarAccountsTooltip: 'Aquí datos de las cuentas de destino',
+	navbarManteca: 'Manteca',
+	navbarMantecaUsers: 'Usuarios',
+	navbarMantecaDeposits: 'Depósitos',
+	navbarMantecaWithdraws: 'Retiros',
+	navbarMantecaUsersTransactions: 'Transacciones',
+	navbarAdminPayments: 'Pagos'
+};

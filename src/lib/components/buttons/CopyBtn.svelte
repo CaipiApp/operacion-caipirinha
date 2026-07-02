@@ -1,0 +1,61 @@
+<script lang="ts">
+  import { t } from '$lib/translate/i18n';
+	import { Button } from "flowbite-svelte";
+
+  export let link: string;
+
+  let showTooltip = 'hidden';
+  let timeoutId: any;
+
+  function cotyToClip() {
+		navigator.clipboard.writeText(link || "");
+		showTooltip = 'visible';
+
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => {
+			showTooltip = 'hidden';
+		}, 1000);
+	}
+
+ 
+
+</script>
+
+
+<Button on:click={cotyToClip} class="flex items-center gap-2 relative">
+  <span>{$t('newPaymentModalCopy')}</span>
+  <svg width="20" height="20" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_246_627)">
+      <path
+        class="text-white"
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M6.5 3.25C6.5 2.38805 6.84241 1.5614 7.4519 0.951903C8.0614 0.34241 8.88805 0 9.75 0L22.75 0C23.612 0 24.4386 0.34241 25.0481 0.951903C25.6576 1.5614 26 2.38805 26 3.25V16.25C26 17.112 25.6576 17.9386 25.0481 18.5481C24.4386 19.1576 23.612 19.5 22.75 19.5H9.75C8.88805 19.5 8.0614 19.1576 7.4519 18.5481C6.84241 17.9386 6.5 17.112 6.5 16.25V3.25ZM9.75 1.625C9.31902 1.625 8.9057 1.7962 8.60095 2.10095C8.29621 2.4057 8.125 2.81902 8.125 3.25V16.25C8.125 16.681 8.29621 17.0943 8.60095 17.399C8.9057 17.7038 9.31902 17.875 9.75 17.875H22.75C23.181 17.875 23.5943 17.7038 23.899 17.399C24.2038 17.0943 24.375 16.681 24.375 16.25V3.25C24.375 2.81902 24.2038 2.4057 23.899 2.10095C23.5943 1.7962 23.181 1.625 22.75 1.625H9.75ZM3.25 8.125C2.81902 8.125 2.4057 8.29621 2.10095 8.60095C1.7962 8.9057 1.625 9.31902 1.625 9.75V22.75C1.625 23.181 1.7962 23.5943 2.10095 23.899C2.4057 24.2038 2.81902 24.375 3.25 24.375H16.25C16.681 24.375 17.0943 24.2038 17.399 23.899C17.7038 23.5943 17.875 23.181 17.875 22.75V21.125H19.5V22.75C19.5 23.612 19.1576 24.4386 18.5481 25.0481C17.9386 25.6576 17.112 26 16.25 26H3.25C2.38805 26 1.5614 25.6576 0.951903 25.0481C0.34241 24.4386 0 23.612 0 22.75V9.75C0 8.88805 0.34241 8.0614 0.951903 7.4519C1.5614 6.84241 2.38805 6.5 3.25 6.5H4.875V8.125H3.25Z"
+        fill="currentColor"
+      />
+    </g>
+    <defs>
+      <clipPath id="clip0_246_627">
+        <rect width="26" height="26" fill="white" />
+      </clipPath>
+    </defs>
+  </svg>
+  <span class="flashtooltip" style="visibility: {showTooltip};">{$t('newPaymentModalCopied')}</span>
+</Button>
+
+<style>
+	.flashtooltip {
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		padding: 5px 10px;
+		border-radius: 6px;
+
+		/* Position the tooltip text - see examples below! */
+		position: absolute;
+		z-index: 99;
+		top: -50%;
+		left: 50%;
+	}
+</style>
+
