@@ -70,11 +70,11 @@
 	onMount(() => {
 		fetchRate();
 		interval = setInterval(fetchRate, 20000);
-		// Dispara el conteo animado del hero: antes dependía de un
-		// IntersectionObserver que nunca llegaba a disparar (el hero está
-		// siempre arriba del fold, así que no tiene sentido esperar scroll).
-		// El delay de 500ms sincroniza con el transition:fade de la misma fila.
-		setTimeout(startStatsAnimation, 500);
+		// Dispara el conteo animado del hero por si content.stats ya estaba
+		// disponible al montar (por ejemplo si se pasó initialContent por SSR).
+		// Si content.stats todavía no llegó, el bloque reactivo de más abajo
+		// se encarga de disparar la animación en cuanto llegue.
+		startStatsAnimation();
 	});
 
 	onDestroy(() => {
@@ -92,7 +92,9 @@
 	}
 
 	function startStatsAnimation() {
-		if (!content?.stats || statsInView) return;
+		// El bloque reactivo que dispara esto también corre en SSR (a
+		// diferencia de onMount), y requestAnimationFrame no existe en Node.
+		if (!browser || !content?.stats || statsInView) return;
 
 		statsInView = true;
 		animatedStats = content.stats.map(() => 0);
@@ -142,6 +144,11 @@
 	$: if (content?.stats && animatedStats.length !== content.stats.length) {
 		animatedStats = content.stats.map(() => 0);
 		statsInView = false;
+		// content.stats puede llegar después del mount (se carga async vía
+		// loadContent()/fetch a /api/content). Si el onMount ya intentó
+		// animar antes de que estos datos existieran, hay que disparar la
+		// animación acá; de lo contrario los contadores quedan clavados en 0.
+		startStatsAnimation();
 	}
 
 </script>
