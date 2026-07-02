@@ -8,6 +8,55 @@
 	export let initialContent: any = null;
 
 	let content: any = initialContent?.hero ?? null;
+	let audience: 'empresa' | 'persona' = 'empresa';
+
+	const audienceCopy: Record<string, Record<'empresa' | 'persona', { description: string; ctaMain: string; ctaSecondary: string }>> = {
+		ES: {
+			empresa: {
+				description:
+					'Cobrá con Pix desde Argentina, sin demoras y sin costo de uso. La solución simple para comercios y empresas que operan con Brasil.',
+				ctaMain: 'Sumar mi empresa',
+				ctaSecondary: 'Caipi App'
+			},
+			persona: {
+				description:
+					'Pagá en cualquier comercio de Brasil como si fueras local. Escaneá el QR de Pix y listo, sin cuenta bancaria brasileña.',
+				ctaMain: 'Descargar Caipi App',
+				ctaSecondary: 'Caipi Empresas'
+			}
+		},
+		PT: {
+			empresa: {
+				description:
+					'Receba via Pix a partir da Argentina, sem demoras e sem custo de uso. A solução simples para comércios e empresas que operam com o Brasil.',
+				ctaMain: 'Cadastrar minha empresa',
+				ctaSecondary: 'Caipi App'
+			},
+			persona: {
+				description:
+					'Pague em qualquer comércio do Brasil como se fosse local. Escaneie o QR do Pix e pronto, sem conta bancária brasileira.',
+				ctaMain: 'Baixar Caipi App',
+				ctaSecondary: 'Caipi Empresas'
+			}
+		},
+		EN: {
+			empresa: {
+				description:
+					'Get paid via Pix from Argentina, with no delays and no usage cost. The simple solution for businesses operating with Brazil.',
+				ctaMain: 'Sign up my business',
+				ctaSecondary: 'Caipi App'
+			},
+			persona: {
+				description:
+					'Pay at any business in Brazil like a local. Scan the Pix QR code and you\'re done, no Brazilian bank account needed.',
+				ctaMain: 'Download Caipi App',
+				ctaSecondary: 'Caipi Empresas'
+			}
+		}
+	};
+
+	$: currentAudienceCopy = audienceCopy[lang]?.[audience] ?? audienceCopy.ES[audience];
+
 	let rate: number | null = null;
 	let statsInView = false;
 	let animatedStats: number[] = [];
@@ -167,6 +216,35 @@
 			<div class="flex-1 text-center lg:text-left">
 				<div
 					transition:fade
+					class="inline-flex items-center gap-1 p-1 rounded-full landing-glass-dark border border-white/10 mb-6"
+					role="tablist"
+				>
+					<button
+						type="button"
+						role="tab"
+						aria-selected={audience === 'persona'}
+						on:click={() => (audience = 'persona')}
+						class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all {audience === 'persona'
+							? 'bg-brand-primary text-black'
+							: 'text-brand-muted hover:text-white'}"
+					>
+						Soy persona
+					</button>
+					<button
+						type="button"
+						role="tab"
+						aria-selected={audience === 'empresa'}
+						on:click={() => (audience = 'empresa')}
+						class="px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wide transition-all {audience === 'empresa'
+							? 'bg-brand-primary text-black'
+							: 'text-brand-muted hover:text-white'}"
+					>
+						Soy empresa
+					</button>
+				</div>
+
+				<div
+					transition:fade
 					class="inline-flex items-center gap-2 bg-brand-primary/10 backdrop-blur-xl border border-brand-primary/25 hover:border-brand-primary/40 px-4 py-1.5 rounded-full mb-8 transition-all"
 				>
 					<span class="flex h-1.5 w-1.5 relative shrink-0">
@@ -205,7 +283,7 @@
 					transition:fly={{ y: 20, duration: 800, delay: 200 }}
 					class="text-lg md:text-xl text-brand-muted mb-12 max-w-xl mx-auto lg:mx-0 leading-relaxed"
 				>
-					{content.description}
+					{currentAudienceCopy.description}
 				</p>
 
 				<div
@@ -213,17 +291,17 @@
 					class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center lg:justify-start flex-wrap"
 				>
 					<button
-						on:click={scrollToPersonal}
+						on:click={audience === 'empresa' ? scrollToPersonal : scrollToEmpresas}
 						class="w-full sm:w-auto border border-white/20 hover:border-white/40 text-white/85 hover:text-white bg-white/5 hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-base transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0 backdrop-blur-md focus:outline-none"
 					>
-						{content.ctaSecondary}
+						{currentAudienceCopy.ctaSecondary}
 					</button>
 
 					<button
-						on:click={scrollToEmpresas}
+						on:click={audience === 'empresa' ? scrollToEmpresas : scrollToPersonal}
 						class="w-full sm:w-auto bg-brand-primary text-black px-10 py-4 rounded-full font-black text-lg hover:bg-white transition-all shadow-2xl shadow-brand-primary/30 active:scale-95 group flex items-center justify-center gap-3 focus:outline-none"
 					>
-						{content.ctaMain}
+						{currentAudienceCopy.ctaMain}
 						<ArrowRight
 							size={22}
 							strokeWidth={3}
