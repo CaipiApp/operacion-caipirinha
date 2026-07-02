@@ -15,7 +15,7 @@ export const translations: Record<string, any> = {
 			description:
 				'Caipi conecta personas y empresas entre Argentina y Brasil, construyendo infraestructura de pagos para la integración financiera del Mercosur.',
 			ctaMain: 'Crear Usuario',
-			ctaSecondary: 'Conocer Caipi Empresas',
+			ctaSecondary: 'Caipi App',
 			stats: [
 				{ value: "10K+", label: "Usuarios" },
 				{ value: '$350M+', label: 'Procesados' },
@@ -297,7 +297,7 @@ export const translations: Record<string, any> = {
           },
           description: "Soluções nativas para comércios e carteira digital para você. Pague e receba via PIX instantaneamente.",
           ctaMain: "Abrir Conta",
-          ctaSecondary: "Como funciona",
+          ctaSecondary: "Caipi App",
           stats: [
             { value: "10K+", label: "Usuários" },
             { value: "$300M+", label: "Processados" },
@@ -531,7 +531,7 @@ export const translations: Record<string, any> = {
           },
           description: "Native solutions for businesses and digital wallet for you. Pay and get paid via PIX instantly.",
           ctaMain: "Open Account",
-          ctaSecondary: "How it works",
+          ctaSecondary: "Caipi App",
           stats: [
             { value: "10K+", label: "Users" },
             { value: "$300M+", label: "Processed" },

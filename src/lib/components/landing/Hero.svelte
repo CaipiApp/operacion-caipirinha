@@ -86,6 +86,11 @@
 		if (el) el.scrollIntoView({ behavior: 'smooth' });
 	}
 
+	function scrollToPersonal() {
+		const el = document.getElementById('personal');
+		if (el) el.scrollIntoView({ behavior: 'smooth' });
+	}
+
 	function startStatsAnimation() {
 		// El bloque reactivo que dispara esto también corre en SSR (a
 		// diferencia de onMount), y requestAnimationFrame no existe en Node.
@@ -208,7 +213,7 @@
 					class="flex flex-col sm:flex-row items-center gap-4 sm:gap-5 justify-center lg:justify-start flex-wrap"
 				>
 					<button
-						on:click={scrollToEmpresas}
+						on:click={scrollToPersonal}
 						class="w-full sm:w-auto border border-white/20 hover:border-white/40 text-white/85 hover:text-white bg-white/5 hover:bg-white/10 px-8 py-4 rounded-full font-semibold text-base transition-all active:scale-95 flex items-center justify-center gap-2 shrink-0 backdrop-blur-md focus:outline-none"
 					>
 						{content.ctaSecondary}
