@@ -103,9 +103,9 @@
 						{lang === 'EN' ? 'TRUSTED ECOSYSTEM' : lang === 'PT' ? 'ECOSSISTEMA' : 'RED DE CONFIANZA'}
 					</span>
 
-					<h3 class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-black tracking-tight mb-4 text-white font-display leading-[1.1] md:leading-tight">
+					<h2 class="text-2xl sm:text-3xl lg:text-[34px] xl:text-[40px] font-black tracking-tight mb-4 text-white font-display leading-[1.1] md:leading-tight">
 						{content.title}
-					</h3>
+					</h2>
 
 					<p class="text-sm md:text-[15px] text-brand-muted leading-relaxed font-normal opacity-90">
 						{content.description}
