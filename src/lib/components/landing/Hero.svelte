@@ -124,6 +124,7 @@
 		// Si content.stats todavía no llegó, el bloque reactivo de más abajo
 		// se encarga de disparar la animación en cuanto llegue.
 		startStatsAnimation();
+		startWalletBalanceAnimation();
 	});
 
 	onDestroy(() => {
@@ -173,6 +174,36 @@
 
 			requestAnimationFrame(animate);
 		});
+	}
+
+	let walletBalance = 0;
+	let walletBalanceInView = false;
+
+	function startWalletBalanceAnimation() {
+		// Misma guarda que startStatsAnimation: los bloques reactivos también
+		// corren en SSR, donde requestAnimationFrame no existe.
+		if (!browser || walletBalanceInView) return;
+		walletBalanceInView = true;
+
+		const target = 1240500;
+		let startTime: number | null = null;
+		const duration = 1600;
+
+		const animate = (timestamp: number) => {
+			if (!startTime) startTime = timestamp;
+			const progress = Math.min((timestamp - startTime) / duration, 1);
+			const easedProgress = progress * (2 - progress);
+
+			walletBalance = easedProgress * target;
+
+			if (progress < 1) {
+				requestAnimationFrame(animate);
+			} else {
+				walletBalance = target;
+			}
+		};
+
+		requestAnimationFrame(animate);
 	}
 
 	const avatars = [
@@ -393,7 +424,7 @@
 										<h3
 											class="text-xl xs:text-2xl sm:text-3xl md:text-[32px] font-black tracking-tighter flex flex-wrap items-center gap-1.5 md:gap-2"
 										>
-											$1.240.500,00
+											${formatNumber(walletBalance)}
 											<span
 												class="flex items-center gap-1 bg-white/5 border border-white/10 px-1.5 md:px-2 py-0.5 rounded-lg shadow-[0_0_10px_rgba(59,130,246,0.2)] shrink-0"
 											>
@@ -551,8 +582,9 @@
 								</div>
 
 								<div class="space-y-1.5 md:space-y-2.5 overflow-hidden flex-1 flex flex-col justify-around">
-									{#each [{ name: 'Joao Ferreira', amount: 'R$ 125,00', time: `${content.mockup.today}, 10:45 AM`, sub: 'Supermercado BH', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=64&h=64&auto=format&fit=crop' }, { name: 'Maria Rossi', amount: 'R$ 250,20', time: `${content.mockup.today}, 09:12 AM`, sub: 'Uber Rio', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=64&h=64&auto=format&fit=crop' }, { name: 'Caipi App', amount: 'R$ 375,00', time: `${content.mockup.yesterday}, 11:30 PM`, sub: content.mockup.recharge, avatar: '/caipi_logo_icon.png' }] as item (`${item.name}-${item.time}`)}
+									{#each [{ name: 'Joao Ferreira', amount: 'R$ 125,00', time: `${content.mockup.today}, 10:45 AM`, sub: 'Supermercado BH', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=64&h=64&auto=format&fit=crop' }, { name: 'Maria Rossi', amount: 'R$ 250,20', time: `${content.mockup.today}, 09:12 AM`, sub: 'Uber Rio', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=64&h=64&auto=format&fit=crop' }, { name: 'Caipi App', amount: 'R$ 375,00', time: `${content.mockup.yesterday}, 11:30 PM`, sub: content.mockup.recharge, avatar: '/caipi_logo_icon.png' }] as item, i (`${item.name}-${item.time}`)}
 										<div
+											in:fly={{ x: 24, duration: 500, delay: 600 + i * 150 }}
 											class="flex items-center justify-between p-2 md:p-3 rounded-xl md:rounded-2xl landing-glass-dark border border-white/5 hover:border-brand-primary/20 hover:bg-white/5 transition-all group/item"
 										>
 											<div class="flex items-center gap-2.5 md:gap-3.5 min-w-0">
