@@ -2,6 +2,7 @@
 	import { fade, slide } from 'svelte/transition';
 	import { ChevronDown, HelpCircle } from 'lucide-svelte';
 	import { browser } from '$app/environment';
+	import { reveal } from '$lib/actions/revealOnScroll';
 
 	export let lang: string;
 	export let initialContent: any = null;
@@ -27,7 +28,7 @@
 		<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-[600px] h-[600px] bg-brand-primary/5 blur-[160px] rounded-full pointer-events-none"></div>
 
 		<div class="max-w-4xl mx-auto relative z-10">
-			<div class="text-center mb-14 md:mb-16">
+			<div use:reveal class="text-center mb-14 md:mb-16">
 				<div
 					transition:fade
 					class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-primary/10 border border-brand-primary/20 text-brand-primary text-xs font-black uppercase tracking-widest mb-6"

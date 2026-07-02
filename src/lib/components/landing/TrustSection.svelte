@@ -3,6 +3,7 @@
 	import { browser } from '$app/environment';
 	import { Lock, Building2 } from 'lucide-svelte';
 	import { onDestroy } from 'svelte';
+	import { reveal } from '$lib/actions/revealOnScroll';
 
 	export let lang: string;
 	export let initialContent: any = null;
@@ -96,7 +97,7 @@
 		<div class="absolute top-1/2 right-0 -translate-y-1/2 -z-10 w-[350px] h-[350px] bg-emerald-500/[0.02] blur-[120px] rounded-full pointer-events-none"></div>
 
 		<div class="max-w-7xl mx-auto px-6">
-			<div class="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16">
+			<div use:reveal class="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-16">
 				<div class="max-w-xl lg:max-w-sm xl:max-w-md text-center lg:text-left shrink-0">
 					<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.25em] bg-brand-primary/10 text-brand-primary border border-brand-primary/20 mb-5 shadow-inner">
 						<span class="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse"></span>

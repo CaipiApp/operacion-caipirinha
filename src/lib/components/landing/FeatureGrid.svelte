@@ -11,6 +11,7 @@
 	} from 'lucide-svelte';
 	import { onMount } from 'svelte';
 	import { browser } from '$app/environment';
+	import { reveal } from '$lib/actions/revealOnScroll';
 
 	export let onOpenRegistration: () => void;
 	export let lang: string;
@@ -55,14 +56,14 @@
 
 {#if content}
 	<section id="soluciones" class="py-16 md:py-24 px-4 sm:px-6 max-w-7xl mx-auto">
-		<div class="text-center mb-10 md:mb-16 px-4">
+		<div class="text-center lg:text-left mb-10 md:mb-16 px-4 max-w-3xl lg:mx-0 mx-auto">
 			<h2
 				class="text-[clamp(1.75rem,8vw,3.5rem)] sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 tracking-tight leading-tight"
 			>
 				{content.title.line1} <br />
 				<span class="landing-gradient-text italic">{content.title.line2}</span>
 			</h2>
-			<p class="text-brand-muted max-w-2xl mx-auto text-base md:text-lg">
+			<p class="text-brand-muted max-w-2xl lg:mx-0 mx-auto text-base md:text-lg">
 				{content.description}
 			</p>
 		</div>
@@ -71,8 +72,8 @@
 			<!-- Business Solution -->
 			<div
 				id="empresas"
-				transition:fade
-				class="landing-glass p-6 sm:p-8 md:p-12 rounded-[32px] md:rounded-[48px] border-white/10 relative overflow-hidden group hover:border-brand-primary/30 transition-all duration-500 scroll-mt-24"
+				use:reveal
+				class="landing-glass p-6 sm:p-8 md:p-12 rounded-[32px] md:rounded-[48px] border-white/10 border-t-2 border-t-brand-primary/60 relative overflow-hidden group hover:border-brand-primary/30 transition-all duration-500 scroll-mt-24"
 			>
 				<div
 					class="absolute -top-12 -right-12 p-8 opacity-[0.03] group-hover:opacity-10 transition-opacity"
@@ -133,8 +134,8 @@
 			<!-- Personal Solution -->
 			<div
 				id="personal"
-				transition:fade
-				class="landing-glass p-6 sm:p-8 md:p-12 rounded-[32px] md:rounded-[48px] border-white/10 relative overflow-hidden group hover:border-blue-500/30 transition-all duration-500 scroll-mt-24"
+				use:reveal={{ delayMs: 120 }}
+				class="landing-glass p-6 sm:p-8 md:p-12 rounded-[32px] md:rounded-[48px] border-white/10 border-t-2 border-t-blue-400/60 relative overflow-hidden group hover:border-blue-500/30 transition-all duration-500 scroll-mt-24"
 			>
 				<!-- Decorative background -->
 				<div
