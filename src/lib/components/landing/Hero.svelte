@@ -3,6 +3,7 @@
 	import { ArrowRight, Star, Wallet, TrendingUp } from 'lucide-svelte';
 	import { onMount, onDestroy } from 'svelte';
 	import { browser } from '$app/environment';
+	import { tilt3d } from '$lib/actions/tilt3d';
 
 	export let lang: string;
 	export let initialContent: any = null;
@@ -396,11 +397,15 @@
 
 			<div
 				transition:fly={{ y: 30, duration: 1000 }}
-				class="flex-1 relative w-full h-full lg:h-[700px] flex items-center justify-center"
+				data-tilt-zone
+				class="flex-1 relative w-full h-full lg:h-[700px] flex items-center justify-center [perspective:1400px]"
 			>
-				<!-- Main Mockup Container -->
+				<!-- Float layer: continuous idle bob, CSS keyframe-driven -->
+				<div class="hero-float w-full max-w-[320px] xs:max-w-[360px] md:max-w-[400px] mx-auto shrink-0">
+				<!-- Main Mockup Container: mouse-driven 3D tilt, JS-driven -->
 				<div
-					class="relative w-full max-w-[320px] xs:max-w-[360px] md:max-w-[400px] mx-auto h-[580px] xs:h-[630px] md:h-[720px] shrink-0"
+					use:tilt3d
+					class="relative w-full h-[580px] xs:h-[630px] md:h-[720px] shrink-0"
 				>
 					<!-- Background Glow -->
 					<div
@@ -674,6 +679,28 @@
 					</div>
 				</div>
 			</div>
+			</div>
 		</div>
 	</section>
 {/if}
+
+<style>
+	/* Gentle continuous float on the wallet mockup, independent of the
+	   mouse-driven 3D tilt (tilt3d action). Disabled for prefers-reduced-motion
+	   so it doesn't fight the user's OS-level motion setting. */
+	@media (prefers-reduced-motion: no-preference) {
+		.hero-float {
+			animation: hero-float 6s ease-in-out infinite;
+		}
+	}
+
+	@keyframes hero-float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-14px);
+		}
+	}
+</style>
