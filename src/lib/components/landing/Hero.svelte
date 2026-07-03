@@ -364,31 +364,31 @@
 
 				<div
 					transition:fade={{ delay: 500 }}
-					class="mt-12 flex flex-wrap items-center gap-6 sm:gap-8 justify-center lg:justify-start text-brand-muted"
+					class="mt-12 grid grid-cols-3 lg:flex lg:flex-wrap divide-x divide-white/10 lg:divide-x-0 items-center lg:gap-8 justify-items-center lg:justify-start text-brand-muted w-full max-w-sm sm:max-w-md lg:w-auto lg:max-w-none mx-auto lg:mx-0"
 				>
 					{#each content.stats as stat, i (`${stat.label}-${i}`)}
 						{@const parsed = parseStat(stat.value)}
-						<div class="flex items-center gap-6 sm:gap-8 group">
-							<div class="flex flex-col transform transition-all duration-300">
-								<span class="text-2xl sm:text-3xl font-black text-white font-display tracking-tight leading-none mb-1.5 min-w-[70px] flex items-center gap-1.5">
+						<div class="flex items-center lg:gap-8 group px-1.5 sm:px-2 lg:px-0">
+							<div class="flex flex-col items-center lg:items-start transform transition-all duration-300">
+								<span class="text-lg xs:text-xl sm:text-3xl font-black text-white font-display tracking-tight leading-none mb-1.5 flex items-center justify-center lg:justify-start gap-1 lg:gap-1.5 flex-wrap">
 									{parsed.prefix}{statsInView
 										? animatedStats[i]?.toLocaleString(undefined, {
 												minimumFractionDigits: parsed.decimals,
 												maximumFractionDigits: parsed.decimals
 											})
 										: '0'}{parsed.suffix}
-									{#if i === 2}
+									{#if i === content.stats.length - 1}
 										<Star
-											class="w-4 h-4 sm:w-[18px] sm:h-[18px] fill-brand-primary text-brand-primary shrink-0 drop-shadow-[0_0_12px_rgba(197,230,68,0.55)] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300 ml-0.5"
+											class="w-3.5 h-3.5 sm:w-[18px] sm:h-[18px] fill-brand-primary text-brand-primary shrink-0 drop-shadow-[0_0_12px_rgba(197,230,68,0.55)] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300 ml-0.5"
 										/>
 									{/if}
 								</span>
-								<span class="text-[10px] font-bold text-brand-muted uppercase opacity-70 group-hover:text-brand-primary group-hover:opacity-100 transition-all duration-300">
+								<span class="text-[9px] sm:text-[10px] font-bold text-brand-muted uppercase opacity-70 group-hover:text-brand-primary group-hover:opacity-100 transition-all duration-300 text-center lg:text-left">
 									{stat.label}
 								</span>
 							</div>
 							{#if i < content.stats.length - 1}
-								<div class="w-px h-8 bg-white/10 transition-colors duration-300 group-hover:bg-brand-primary/20"></div>
+								<div class="hidden lg:block w-px h-8 bg-white/10 transition-colors duration-300 group-hover:bg-brand-primary/20"></div>
 							{/if}
 						</div>
 					{/each}
