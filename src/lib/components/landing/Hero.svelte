@@ -347,7 +347,7 @@
 								<div
 									class="w-8 h-8 rounded-full border-2 border-brand-dark bg-brand-gray overflow-hidden"
 								>
-									<img src={url} alt="user avatar" class="w-full h-full object-cover" />
+									<img src={url} alt="user avatar" width="32" height="32" class="w-full h-full object-cover" />
 								</div>
 							{/each}
 						</div>
@@ -436,6 +436,8 @@
 											<img
 												src="https://flagcdn.com/w40/ar.png"
 												alt="ARS"
+												width="16"
+												height="16"
 												class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full object-cover border border-white/30 brightness-110"
 												referrerpolicy="no-referrer"
 											/>
@@ -492,6 +494,8 @@
 											<img
 												src="https://flagcdn.com/w40/ar.png"
 												alt="ARS"
+												width="16"
+												height="16"
 												class="w-2 h-2 rounded-full object-cover border border-white/30 brightness-110"
 												referrerpolicy="no-referrer"
 											/>
@@ -525,7 +529,7 @@
 									<div class="flex flex-col gap-1 md:gap-1.5">
 										<div class="flex items-center justify-between py-0.5 md:py-1 px-1 hover:bg-white/[0.01] rounded-lg transition-colors">
 											<div class="flex items-center gap-2">
-												<img src="https://flagcdn.com/w40/ar.png" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10" referrerpolicy="no-referrer" alt="Argentina" />
+												<img src="https://flagcdn.com/w40/ar.png" width="14" height="14" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10" referrerpolicy="no-referrer" alt="Argentina" />
 												<span class="text-[10px] md:text-xs font-bold text-white/95">Argentina</span>
 											</div>
 											<div class="flex items-center gap-1.5">
@@ -536,7 +540,7 @@
 
 										<div class="flex items-center justify-between py-0.5 md:py-1 px-1 hover:bg-white/[0.01] rounded-lg transition-colors">
 											<div class="flex items-center gap-2">
-												<img src="https://flagcdn.com/w40/br.png" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10" referrerpolicy="no-referrer" alt="Brasil" />
+												<img src="https://flagcdn.com/w40/br.png" width="14" height="14" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10" referrerpolicy="no-referrer" alt="Brasil" />
 												<span class="text-[10px] md:text-xs font-bold text-white/95">Brasil</span>
 											</div>
 											<div class="flex items-center gap-1.5">
@@ -547,7 +551,7 @@
 
 										<div class="flex items-center justify-between py-0.5 md:py-1 px-1 hover:bg-white/[0.01] rounded-lg transition-colors opacity-50 hover:opacity-90 duration-300">
 											<div class="flex items-center gap-2">
-												<img src="https://flagcdn.com/w40/py.png" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10 grayscale" referrerpolicy="no-referrer" alt="Paraguay" />
+												<img src="https://flagcdn.com/w40/py.png" width="14" height="14" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10 grayscale" referrerpolicy="no-referrer" alt="Paraguay" />
 												<span class="text-[10px] md:text-xs font-medium text-white/80">Paraguay</span>
 											</div>
 											<div class="flex items-center gap-1.5">
@@ -558,7 +562,7 @@
 
 										<div class="flex items-center justify-between py-0.5 md:py-1 px-1 hover:bg-white/[0.01] rounded-lg transition-colors opacity-50 hover:opacity-90 duration-300">
 											<div class="flex items-center gap-2">
-												<img src="https://flagcdn.com/w40/uy.png" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10 grayscale" referrerpolicy="no-referrer" alt="Uruguay" />
+												<img src="https://flagcdn.com/w40/uy.png" width="14" height="14" class="w-3.5 h-3.5 rounded-full object-cover border border-white/10 grayscale" referrerpolicy="no-referrer" alt="Uruguay" />
 												<span class="text-[10px] md:text-xs font-medium text-white/80">Uruguay</span>
 											</div>
 											<div class="flex items-center gap-1.5">
@@ -599,6 +603,8 @@
 													<img
 														src={item.avatar}
 														alt={item.name}
+														width="36"
+														height="36"
 														class="w-full h-full object-cover {item.name === 'Caipi App'
 															? 'p-1 xs:p-1.5 md:p-2 opacity-80'
 															: ''}"

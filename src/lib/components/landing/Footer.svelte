@@ -56,6 +56,7 @@
 								href={social.url}
 								target="_blank"
 								rel="noreferrer"
+								aria-label={social.name}
 								class="w-11 h-11 rounded-xl landing-glass flex items-center justify-center hover:bg-brand-primary hover:text-black hover:border-brand-primary transition-all duration-300"
 							>
 								{#if social.name === 'Twitter'}

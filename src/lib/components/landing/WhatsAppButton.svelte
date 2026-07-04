@@ -9,6 +9,7 @@
 	href="https://wa.me/5493794182462"
 	target="_blank"
 	rel="noreferrer"
+	aria-label={lang === 'PT' ? 'Suporte via WhatsApp' : lang === 'EN' ? 'Support via WhatsApp' : 'Soporte vía WhatsApp'}
 	transition:fly={{ y: 20, duration: 600, delay: 500 }}
 	class="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[100] group flex items-center gap-3 active:scale-95 transition-all outline-none"
 >

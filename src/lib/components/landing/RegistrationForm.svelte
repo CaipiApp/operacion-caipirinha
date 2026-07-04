@@ -231,6 +231,7 @@
 			<button
 				type="button"
 				on:click|stopPropagation={onClose}
+				aria-label="Cerrar"
 				class="absolute top-4 right-4 sm:top-6 sm:right-6 z-[70] w-12 h-12 flex items-center justify-center rounded-full landing-glass hover:bg-white/20 transition-all active:scale-90 group focus:outline-none"
 			>
 				<X class="text-white group-hover:rotate-90 transition-transform" size={24} />
@@ -697,6 +698,7 @@
 																	delete uploadStates[item.k];
 																	uploadStates = { ...uploadStates };
 																}}
+																aria-label="Quitar archivo"
 																class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center shrink-0"
 															>
 																<X size={16} />

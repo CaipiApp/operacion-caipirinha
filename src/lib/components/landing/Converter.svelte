@@ -235,6 +235,7 @@
 					<div class="flex justify-center -my-4 relative z-10">
 						<button
 							on:click={toggleMode}
+							aria-label="Invertir dirección de la conversión"
 							class="w-12 h-12 bg-brand-primary rounded-full flex items-center justify-center text-black hover:rotate-180 transition-all duration-500 active:scale-90 focus:outline-none"
 						>
 							<ArrowLeftRight size={20} />

@@ -20,6 +20,29 @@ export function getLocale(event: any): Locale {
 
 const LEGACY_PUBLIC_PATHS = new Set(['/about-us', '/contacts', '/old']);
 
+// Headers de seguridad ausentes hoy en producción (0/7 en la auditoria).
+// Se aplican aca porque hooks.server.ts corre en cualquier hosting
+// (Docker/VPS con adapter-node o Vercel con adapter-auto), a diferencia de
+// una config de nginx que solo cubriria el deploy actual.
+function applySecurityHeaders(headers: Headers) {
+  headers.set('X-Content-Type-Options', 'nosniff');
+  headers.set('X-Frame-Options', 'DENY');
+  headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  headers.set('Permissions-Policy', 'camera=(self), microphone=(), geolocation=()');
+  headers.set(
+    'Content-Security-Policy',
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline'",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+      "img-src 'self' data: https:",
+      "font-src 'self' data: https://fonts.gstatic.com",
+      "connect-src 'self' https:",
+      "frame-ancestors 'none'"
+    ].join('; ')
+  );
+}
+
 export const handle: Handle = async ({ event, resolve }) => {
   const normalizedPath = event.url.pathname.replace(/\/+$/, '') || '/';
 
@@ -32,7 +55,9 @@ export const handle: Handle = async ({ event, resolve }) => {
   const token = event.cookies.get('token');
   if(!token){
     event.locals.user = undefined;
-    return await resolve(event, { transformPageChunk: ({html}) => html.replace('%LANGUAGE%', event.locals.locale)});
+    const response = await resolve(event, { transformPageChunk: ({html}) => html.replace('%LANGUAGE%', event.locals.locale)});
+    applySecurityHeaders(response.headers);
+    return response;
   }
 
   const res = await api.get({fetch, endpoint: 'auth/user', token});
@@ -44,8 +69,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     event.cookies.delete('token', { secure: false, path: '/' });
   }
 
-	return await resolve(event, {
+	const response = await resolve(event, {
 		transformPageChunk: ({html}) => html.replace('%LANGUAGE%', event.locals.locale)});
+	applySecurityHeaders(response.headers);
+	return response;
 };
 
 export const handleError: HandleServerError = async ({ error, event, status, message }) => {

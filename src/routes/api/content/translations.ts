@@ -68,12 +68,12 @@ export const translations: Record<string, any> = {
 			description:
 				'Algunas de las más de 70 empresas de Argentina y Brasil que ya optimizan sus pagos y cobros con Caipi.',
           companies: [
-            { name: "Shell 4 Bocas", industry: "Energía", logo: "input_file_0.png" },
-            { name: "LA REGINA LODGE", industry: "Hospitalidad", logo: "input_file_4.png" },
-            { name: "Ray Bus", industry: "Transporte", logo: "input_file_2.png" },
-            { name: "Nordemaq", industry: "Agroindustrial", logo: "input_file_3.png" },
-            { name: "Lion Global", industry: "Consultoría", logo: "input_file_1.png" },
-            { name: "FLORIPABEACH", industry: "Turismo", logo: "input_file_5.png" }
+            { name: "Shell 4 Bocas", industry: "Energía" },
+            { name: "LA REGINA LODGE", industry: "Hospitalidad" },
+            { name: "Ray Bus", industry: "Transporte" },
+            { name: "Nordemaq", industry: "Agroindustrial" },
+            { name: "Lion Global", industry: "Consultoría" },
+            { name: "FLORIPABEACH", industry: "Turismo" }
           ]
         },
 		converter: {
@@ -348,12 +348,12 @@ export const translations: Record<string, any> = {
           title: "Empresas que já confiam em nós",
           description: "Alguns dos comércios e empresas da Argentina e do Brasil que já otimizam seus pagamentos e recebimentos com a Caipi.",
           companies: [
-            { name: "Shell 4 Bocas", industry: "Energia", logo: "input_file_0.png" },
-            { name: "LA REGINA LODGE", industry: "Hospitalidade", logo: "input_file_4.png" },
-            { name: "Ray Bus", industry: "Transporte", logo: "input_file_2.png" },
-            { name: "Nordemaq", industry: "Agroindustrial", logo: "input_file_3.png" },
-            { name: "Lion Global", industry: "Consultoria", logo: "input_file_1.png" },
-            { name: "FLORIPABEACH", industry: "Turismo", logo: "input_file_5.png" }
+            { name: "Shell 4 Bocas", industry: "Energia" },
+            { name: "LA REGINA LODGE", industry: "Hospitalidade" },
+            { name: "Ray Bus", industry: "Transporte" },
+            { name: "Nordemaq", industry: "Agroindustrial" },
+            { name: "Lion Global", industry: "Consultoria" },
+            { name: "FLORIPABEACH", industry: "Turismo" }
           ]
         },
         converter: {
@@ -582,12 +582,12 @@ export const translations: Record<string, any> = {
           title: "Companies that trust us",
           description: "Some of the businesses and companies in Argentina and Brazil that are already optimizing their payments and collections with Caipi.",
           companies: [
-            { name: "Shell 4 Bocas", industry: "Energy", logo: "input_file_0.png" },
-            { name: "LA REGINA LODGE", industry: "Hospitality", logo: "input_file_4.png" },
-            { name: "Ray Bus", industry: "Transport", logo: "input_file_2.png" },
-            { name: "Nordemaq", industry: "Agroindustrial", logo: "input_file_3.png" },
-            { name: "Lion Global", industry: "Consulting", logo: "input_file_1.png" },
-            { name: "FLORIPABEACH", industry: "Tourism", logo: "input_file_5.png" }
+            { name: "Shell 4 Bocas", industry: "Energy" },
+            { name: "LA REGINA LODGE", industry: "Hospitality" },
+            { name: "Ray Bus", industry: "Transport" },
+            { name: "Nordemaq", industry: "Agroindustrial" },
+            { name: "Lion Global", industry: "Consulting" },
+            { name: "FLORIPABEACH", industry: "Tourism" }
           ]
         },
         converter: {

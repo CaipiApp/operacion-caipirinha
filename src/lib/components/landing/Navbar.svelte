@@ -72,6 +72,8 @@
 						<img
 							src="/caipi_logo_full.png"
 							alt="Caipi Logo"
+							width="108"
+							height="48"
 							class="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
 							referrerpolicy="no-referrer"
 						/>
@@ -145,6 +147,8 @@
 				<!-- Mobile Menu Toggle -->
 				<button
 					on:click={toggleMobileMenu}
+					aria-label={isMobileMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+					aria-expanded={isMobileMenuOpen}
 					class="md:hidden p-2 text-white bg-white/5 hover:bg-white/10 rounded-xl transition-colors border border-white/10 ml-2 focus:outline-none"
 				>
 					{#if isMobileMenuOpen}
@@ -173,8 +177,10 @@
 				>
 					<img src="/caipi_logo_full.png" class="h-8" alt="Logo" referrerpolicy="no-referrer" />
 				</a>
-				<button on:click={() => (isMobileMenuOpen = false)} class="p-2 focus:outline-none"
-					><X size={32} /></button
+				<button
+					on:click={() => (isMobileMenuOpen = false)}
+					aria-label="Cerrar menú"
+					class="p-2 focus:outline-none"><X size={32} /></button
 				>
 			</div>
 
