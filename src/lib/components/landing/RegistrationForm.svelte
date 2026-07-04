@@ -14,6 +14,14 @@
 		Briefcase
 	} from 'lucide-svelte';
 	import { onMount } from 'svelte';
+	import {
+		formatPhone,
+		normalizePhone,
+		validatePhone,
+		formatCUIT,
+		normalizeCUIT,
+		validateCUIT
+	} from '$lib/validation/contactFields';
 
 	export let isOpen = false;
 	export let onClose: () => void;
@@ -33,6 +41,39 @@
 		taxId: '',
 		businessType: 'Empresa'
 	};
+
+	let phoneError = '';
+	let taxIdError = '';
+
+	function handlePhoneInput(e: Event) {
+		const input = e.target as HTMLInputElement;
+		formData.phone = formatPhone(input.value);
+		if (phoneError) phoneError = '';
+	}
+
+	function handlePhoneBlur() {
+		if (formData.phone.trim() === '') {
+			phoneError = '';
+			return;
+		}
+		phoneError = validatePhone(formData.phone)
+			? ''
+			: 'Ingresá un teléfono válido con código de país.';
+	}
+
+	function handleTaxIdInput(e: Event) {
+		const input = e.target as HTMLInputElement;
+		formData.taxId = formatCUIT(input.value);
+		if (taxIdError) taxIdError = '';
+	}
+
+	function handleTaxIdBlur() {
+		if (formData.taxId.trim() === '') {
+			taxIdError = '';
+			return;
+		}
+		taxIdError = validateCUIT(formData.taxId) ? '' : 'Ingresá un CUIT válido.';
+	}
 
 	let files: { [key: string]: File[] } = {
 		doc1: [],
@@ -110,7 +151,9 @@
 		formData.phone.trim() !== '' &&
 		formData.taxId.trim() !== '' &&
 		formData.businessType.trim() !== '' &&
-		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email) &&
+		validatePhone(formData.phone) &&
+		validateCUIT(formData.taxId);
 
 	$: isStep3Valid = content
 		? content.step3Files?.every(
@@ -120,14 +163,33 @@
 		: false;
 
 	async function handleSubmit() {
-		if (!isStep1Valid || !isStep3Valid) return;
+		handlePhoneBlur();
+		handleTaxIdBlur();
+		if (!isStep1Valid || !isStep3Valid || phoneError || taxIdError) return;
 		isSubmitting = true;
 
 		const data = new FormData();
-		Object.entries(formData).forEach(([k, v]) => data.append(k, String(v)));
+		Object.entries(formData).forEach(([k, v]) => {
+			if (k === 'phone') {
+				data.append(k, normalizePhone(v));
+			} else if (k === 'taxId') {
+				data.append(k, normalizeCUIT(v));
+			} else {
+				data.append(k, String(v));
+			}
+		});
 		Object.entries(files).forEach(([k, fileList]) => {
 			fileList.forEach((file) => data.append(k, file));
 		});
+
+		// Etiqueta legible de cada campo documental (ej. "doc1" -> "Identidad
+		// Apoderados"), para que el backend pueda armar el nombre operativo del
+		// archivo sin duplicar el copy de traducciones en el servidor.
+		const documentFieldLabels: Record<string, string> = {};
+		content.step3Files?.forEach((item: { k: string; l: string }) => {
+			documentFieldLabels[item.k] = item.l;
+		});
+		data.append('documentFieldLabels', JSON.stringify(documentFieldLabels));
 
 		try {
 			const response = await fetch('/api/register', {
@@ -368,9 +430,23 @@
 										<input
 											id="bizPhone"
 											required
-											bind:value={formData.phone}
-											class="w-full bg-white/[0.03] border-b-2 border-white/10 py-3 sm:py-5 px-0 outline-none focus:border-brand-primary focus:bg-white/[0.05] transition-all text-sm sm:text-base font-bold placeholder:text-white/20"
+											inputmode="tel"
+											autocomplete="tel"
+											placeholder="+54 11 1234-5678"
+											value={formData.phone}
+											on:input={handlePhoneInput}
+											on:blur={handlePhoneBlur}
+											aria-invalid={!!phoneError}
+											aria-describedby="bizPhone-error"
+											class="w-full bg-white/[0.03] border-b-2 py-3 sm:py-5 px-0 outline-none focus:bg-white/[0.05] transition-all text-sm sm:text-base font-bold placeholder:text-white/20 {phoneError
+												? 'border-red-500'
+												: 'border-white/10 focus:border-brand-primary'}"
 										/>
+										{#if phoneError}
+											<p id="bizPhone-error" class="text-[10px] sm:text-xs font-bold text-red-400">
+												{phoneError}
+											</p>
+										{/if}
 									</div>
 									<div class="space-y-2 group">
 										<label
@@ -383,9 +459,22 @@
 										<input
 											id="bizTaxId"
 											required
-											bind:value={formData.taxId}
-											class="w-full bg-white/[0.03] border-b-2 border-white/10 py-3 sm:py-5 px-0 outline-none focus:border-brand-primary focus:bg-white/[0.05] transition-all text-sm sm:text-base font-bold placeholder:text-white/20"
+											inputmode="numeric"
+											placeholder="20-12345678-9"
+											value={formData.taxId}
+											on:input={handleTaxIdInput}
+											on:blur={handleTaxIdBlur}
+											aria-invalid={!!taxIdError}
+											aria-describedby="bizTaxId-error"
+											class="w-full bg-white/[0.03] border-b-2 py-3 sm:py-5 px-0 outline-none focus:bg-white/[0.05] transition-all text-sm sm:text-base font-bold placeholder:text-white/20 {taxIdError
+												? 'border-red-500'
+												: 'border-white/10 focus:border-brand-primary'}"
 										/>
+										{#if taxIdError}
+											<p id="bizTaxId-error" class="text-[10px] sm:text-xs font-bold text-red-400">
+												{taxIdError}
+											</p>
+										{/if}
 									</div>
 								</div>
 
@@ -423,13 +512,15 @@
 
 								<div class="grid grid-cols-1 gap-4 sm:gap-5">
 									{#each resources as res}
+										{@const ext = res.url.split('.').pop()?.toLowerCase() ?? ''}
 										<a
 											href={res.url}
 											target="_blank"
 											rel="noreferrer"
+											download={`${res.name}.${ext}`}
 											class="flex items-center justify-between p-5 sm:p-7 bg-white/[0.03] rounded-2xl sm:rounded-3xl border-2 border-white/5 hover:border-brand-primary/30 hover:bg-white/[0.06] transition-all group shadow-sm"
 										>
-											<div class="flex items-center gap-4 sm:gap-5">
+											<div class="flex items-center gap-4 sm:gap-5 min-w-0 flex-1">
 												<div
 													class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:scale-110 transition-transform shrink-0"
 												>
@@ -444,7 +535,7 @@
 													<div class="flex items-center gap-2 mt-1 sm:mt-1.5 opacity-40">
 														<span
 															class="text-[8px] sm:text-[10px] font-black uppercase tracking-wider"
-															>PDF</span
+															>{ext}</span
 														>
 														<div class="w-0.5 h-0.5 sm:w-1 sm:h-1 rounded-full bg-white" />
 														<span
@@ -521,7 +612,7 @@
 													? 'bg-brand-primary/[0.04] border-brand-primary shadow-[0_10px_30px_-10px_rgba(197,230,68,0.2)]'
 													: 'bg-white/[0.02] border-white/5 hover:border-white/20'}"
 											>
-												<div class="flex items-center gap-4 sm:gap-6 mb-4 sm:mb-0">
+												<div class="flex items-center gap-4 sm:gap-6 mb-4 sm:mb-0 min-w-0 flex-1">
 													<div
 														class="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 transition-all duration-500 {files[
 															item.k

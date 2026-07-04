@@ -11,3 +11,9 @@ vite.config.ts.timestamp-*
 .vscode
 src/routes/formus/
 src/routes/formusMP/
+
+.vercel
+.env*
+.gstack/
+.claude/
+dev_*.log
