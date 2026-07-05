@@ -1,7 +1,6 @@
 export default {
 	'navbar.items.btn1': 'O que é caipi?',
 	'navbar.items.btn2': 'Benefícios',
-	'navbar.items.btn3': 'Sobre nós',
 	'navbar.items.btn4': 'Contate-nos',
 	'navbar.items.btn5': 'Entrar',
 	'navbar.items.terminos': 'Termos',
