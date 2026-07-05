@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Toaster } from 'svelte-french-toast';
 	import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';
@@ -7,6 +7,21 @@
 	import '../app.css';
 	import { browser } from '$app/environment';
 	import { getLandingRouteMetadata } from '$lib/components/landing/routeMetadata';
+
+	export let data;
+
+	// Un tag de script no-JS en el template no evalua {expr} (Svelte lo trata
+	// como texto estatico) - hay que inyectarlo via {@html}. Escapamos "menor
+	// que" para que ningun valor del contenido pueda cerrar el tag antes de
+	// tiempo, y armamos las etiquetas por concatenacion para que el literal
+	// completo no aparezca en este bloque.
+	function jsonLdScript(payload: unknown): string {
+		const angleBracket = new RegExp(String.fromCharCode(60), 'g');
+		const json = JSON.stringify(payload).replace(angleBracket, '\\u003c');
+		const openTag = '<' + 'script type="application/ld+json">';
+		const closeTag = '<' + '/script>';
+		return openTag + json + closeTag;
+	}
 
 	NProgress.configure({
 		// Full list:
@@ -33,6 +48,51 @@
 		pathname === '/cobrar-con-pix' ||
 		pathname === '/pagos-argentina-brasil' ||
 		pathname === '/mercosur';
+
+	// Datos estructurados (schema.org). Organization/Service van en todas las
+	// rutas de landing; FAQPage solo en Home, que es la unica ruta donde el
+	// componente FAQ realmente renderiza este contenido (el schema debe
+	// reflejar exactamente lo que la pagina muestra).
+	const organizationJsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'Caipi',
+		url: 'https://caipi.app/',
+		logo: 'https://caipi.app/caipi_logo_full.png',
+		description:
+			'Caipi es una plataforma tecnologica de pagos cross-border entre Argentina y Brasil via Pix, con expansion planeada a Paraguay y Uruguay.',
+		sameAs: [
+			'https://www.instagram.com/caipi.app/',
+			'https://ar.linkedin.com/company/caipi-app',
+			'https://x.com/caipi_app'
+		]
+	};
+
+	const serviceJsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'Service',
+		serviceType: 'Pagos y cobros cross-border via Pix',
+		provider: { '@type': 'Organization', name: 'Caipi', url: 'https://caipi.app/' },
+		areaServed: [
+			{ '@type': 'Country', name: 'Argentina' },
+			{ '@type': 'Country', name: 'Brasil' }
+		],
+		description:
+			'Infraestructura de pagos para operar entre Argentina y Brasil mediante Pix, con soluciones para personas (Caipi App) y empresas (Caipi Empresas).'
+	};
+
+	$: faqItems = pathname === '/' ? (data?.landingContent?.faq?.items ?? []) : [];
+	$: faqJsonLd = faqItems.length
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				mainEntity: faqItems.map((item: { q: string; a: string }) => ({
+					'@type': 'Question',
+					name: item.q,
+					acceptedAnswer: { '@type': 'Answer', text: item.a }
+				}))
+			}
+		: null;
 </script>
 
 <svelte:head>
@@ -88,6 +148,12 @@
 		name="apple-mobile-web-app-description"
 		content="Pagos y cobros entre Argentina, Brasil y el Mercosur."
 	/>
+
+	{@html jsonLdScript(organizationJsonLd)}
+	{@html jsonLdScript(serviceJsonLd)}
+	{#if faqJsonLd}
+		{@html jsonLdScript(faqJsonLd)}
+	{/if}
 </svelte:head>
 
 <slot />
